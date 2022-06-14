@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* left header */
+.left_header {
+    width: 50%;
+}
+
+.logo_header {
+    width: 50%;
+}
+
+.date-present {
+    font-size: 20px;
+    margin-left: 18px;
+}
+
+@media screen and (max-width: 1080px) {
+    .time_header {
+        font-size: 110px;
+        margin-top: 20px;
+    }
+
+    .date-present {
+        font-size: 35px;
+        margin-left: 50px;
+    }
+}

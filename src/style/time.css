@@ -1,0 +1,13 @@
+.time_header {
+    display: flex;
+    justify-content: end;
+    font-size: 60px;
+    color: black;
+}
+
+@media screen and (max-width: 1080px) {
+    .time_header {
+        font-size: 110px;
+        margin-top: 20px;
+    }
+}
