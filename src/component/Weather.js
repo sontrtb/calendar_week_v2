@@ -1,23 +1,14 @@
 import '../style/weather.css';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import moment from 'moment';
+import {API_Key} from "../config/connfig";
+import {WeatherContext} from "../App";
 
 function Weather() {
-
-    const API_Key = 'f47308fffabb6b503979991b847193b5';
-
-    const [dataCurrent, setDataCurrent] = useState();
+    
     const [dataFuture, setDataFuture] = useState([]);
 
-    const getWeatherDataCurrent = () => {
-        // navigator.geolocation.getCurrentPosition((data) => {
-        //     let {latitude, longitude} = data.coords;
-            // console.log(latitude, longitude);
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=21&lon=105&units=metric&appid=${API_Key}`)
-            .then(response => response.json())
-            .then(data => setDataCurrent(data));
-        // })
-    }
+    const dataCurrent = useContext(WeatherContext);
 
     const getWeatherDataFuture = () => {
         // navigator.geolocation.getCurrentPosition((data) => {
@@ -29,17 +20,14 @@ function Weather() {
     }
 
     useEffect(() => {
-        getWeatherDataCurrent();
         getWeatherDataFuture();
-
-        setInterval(getWeatherDataCurrent, 5*60*1000);
         setInterval(getWeatherDataFuture, 60*60*1000);
     }, []);
 
     return (
         <div className="weather-wrap">
             {
-                dataCurrent?.weather[0]?.icon &&
+                dataCurrent?.weather &&
                 <div className='weather-current'>
                     <img src={`http://openweathermap.org/img/wn/${dataCurrent.weather[0].icon}@4x.png`} alt='thoi tiet' />
                     <div>{dataCurrent.main.temp.toFixed(0)}°C</div>

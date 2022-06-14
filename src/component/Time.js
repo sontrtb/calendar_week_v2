@@ -11,10 +11,6 @@ function Time() {
 
     const updateTime = () => {
         const d = new Date();
-        const hourNow = d.getHours();
-        const minNow  = d.getMinutes();
-        const secNow = d.getSeconds();
-
         setHour(d.getHours());
         setMin(d.getMinutes());
         setSec(d.getSeconds());
@@ -24,9 +20,9 @@ function Time() {
 
     return (
         <div className='time_header'>
-            <span>{hour}</span>:
-            <span>{min}:</span>
-            <span>{sec}</span>
+            <span>{hour < 10 ? `0${hour}`: hour}</span>:
+            <span>{min < 10 ? `0${min}`: min}:</span>
+            <span>{sec < 10 ? `0${sec}`: sec}</span>
         </div>
     )
 }

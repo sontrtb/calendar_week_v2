@@ -1,5 +1,5 @@
 function ListItem({ daySelect }) {
-    console.log(daySelect);
+    // console.log(daySelect);
     return (
         <div>
 
