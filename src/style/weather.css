@@ -46,7 +46,7 @@
     }
 
     .weather-current>div {
-        font-size: 60px;
+        font-size: 50px;
         line-height: 60px;
         font-weight: 600;
     }
@@ -72,5 +72,10 @@
     .weather-future-wrap>div {
         font-size: 18px;
         margin-bottom: 2px;
+    }
+
+    .tem-wrap_weather-future {
+        margin-top: 10px;
+        line-height: 13px;
     }
 }

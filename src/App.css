@@ -20,6 +20,10 @@ ul {
   margin: 0;
 }
 
+.disclaimer {
+  display: none !important;
+}
+
 .App {
   background-color: #c0c0c0;
   display: flex;

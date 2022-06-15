@@ -1,8 +1,13 @@
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {API} from '../config/connfig';
 import '../style/list-item.css';
-import {CheckSquareOutlined, PlusCircleOutlined, DeleteOutlined} from '@ant-design/icons';
+import {
+    CheckSquareOutlined,
+    PlusCircleOutlined,
+    DeleteOutlined,
+    LoadingOutlined
+} from '@ant-design/icons';
 import ModalAdd from './modal/ModalAdd';
 import {notification} from 'antd';
 
@@ -11,15 +16,23 @@ function ListItem({ daySelect }) {
     const [listCalendar, setListCalendar] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [refetch, setRefetch] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const scrollRef = useRef(null)
+    const d = new Date();
 
     const refetchListCalendar = () => {
         setRefetch(!refetch);
     }
 
     useEffect(() => {
+        setLoading(true);
         axios.get(API + "/" + daySelect)
-        .then(res => setListCalendar(res.data))
-        .catch(err => console.log(err));
+        .then(res => {
+            setListCalendar(res.data)
+            setLoading(false);
+        })
+        .catch(err => setLoading(false));
     }, [daySelect, refetch]);
 
     const handleDelete = (id) => {
@@ -37,11 +50,23 @@ function ListItem({ daySelect }) {
         setIsModalVisible(!isModalVisible);
     }
 
+    const scrollToBottom = () => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        setInterval(() => {
+            if(d.getHours() > 12){
+                scrollToBottom();
+            }
+        }, 30 * 1000);
+    }, []);
+
     return (
         <div>
             <div className='list-calendar-wrap'>
                 {
-                    listCalendar.map((item, index) => (
+                    !loading && listCalendar.map((item, index) => (
                         <div className="flex" key={index}>
                             <div className="icon-item-wrap">
                                 <CheckSquareOutlined className='icon-item'/>
@@ -70,6 +95,13 @@ function ListItem({ daySelect }) {
                         </div>
                     ))
                 }
+                {
+                    loading && 
+                    <div className='loading-wrap'>
+                        <LoadingOutlined className='loading-icon'/>
+                    </div>
+                }
+                <div ref={scrollRef} />
             </div>
 
             <div className='add-item' onClick={toggerModal}>

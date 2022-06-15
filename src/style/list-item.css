@@ -68,7 +68,7 @@
 .add-item {
     position: fixed;
     bottom: 10px;
-    right: calc( 50% - 0px );
+    right: calc( 50% - 20px );
     cursor: pointer;
 }
 
@@ -103,6 +103,16 @@
 }
 .list-calendar-wrap::-webkit-scrollbar {
     display: none;
+}
+
+.loading-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.loading-icon {
+    font-size: 50px;
 }
 
 @media screen and (max-width: 1080px) {
@@ -142,5 +152,9 @@
     }
     .icon-add-item {
         font-size: 60px;
+    }
+
+    .loading-icon {
+        font-size: 100px;
     }
 }

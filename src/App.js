@@ -5,7 +5,6 @@ import Footer from './layout/Footer';
 import { createContext, useState, useEffect } from 'react';
 import { API_Key } from './config/connfig';
 import axios from 'axios';
-import {FullscreenOutlined} from '@ant-design/icons';
 
 export const WeatherContext = createContext();
 
@@ -51,10 +50,6 @@ function App() {
     return;
   };
 
-  const fullScreen = () => {
-
-  }
-
   return (
     <WeatherContext.Provider value={dataCurrent}>
       <div className="App">
@@ -65,9 +60,6 @@ function App() {
           <Header />
           <Content />
           <Footer />
-        </div>
-        <div onClick={fullScreen}>
-          <FullscreenOutlined style={{fontSize: '30px', margin: '10px'}}/>
         </div>
       </div>
     </WeatherContext.Provider>

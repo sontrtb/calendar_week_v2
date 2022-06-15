@@ -6,7 +6,7 @@ function SelectDay({ daySelect, setDaySelect }) {
     const d = new Date();
     const dayNow = d.getDay();
 
-    const dayOfWeek = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    const dayOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
 
     const handleSelectDay = (day) => {
         setDaySelect(day);
