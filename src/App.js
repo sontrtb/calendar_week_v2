@@ -1,8 +1,11 @@
 import './App.css';
 import Header from './layout/Header';
 import Content from './layout/Content';
+import Footer from './layout/Footer';
 import { createContext, useState, useEffect } from 'react';
 import { API_Key } from './config/connfig';
+import axios from 'axios';
+import {FullscreenOutlined} from '@ant-design/icons';
 
 export const WeatherContext = createContext();
 
@@ -27,9 +30,9 @@ function App() {
     // navigator.geolocation.getCurrentPosition((data) => {
     //     let {latitude, longitude} = data.coords;
         // console.log(latitude, longitude);
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=21&lon=105&units=metric&appid=${API_Key}`)
-        .then(response => response.json())
-        .then(data => setDataCurrent(data));
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=21&lon=105&units=metric&appid=${API_Key}`)
+        .then(res => setDataCurrent(res.data))
+        .catch(err => console.log(err));
     // })
   }
 
@@ -46,7 +49,11 @@ function App() {
           return weatherBackground[i]
     };
     return;
-};
+  };
+
+  const fullScreen = () => {
+
+  }
 
   return (
     <WeatherContext.Provider value={dataCurrent}>
@@ -57,6 +64,10 @@ function App() {
         >
           <Header />
           <Content />
+          <Footer />
+        </div>
+        <div onClick={fullScreen}>
+          <FullscreenOutlined style={{fontSize: '30px', margin: '10px'}}/>
         </div>
       </div>
     </WeatherContext.Provider>

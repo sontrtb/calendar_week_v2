@@ -1,0 +1,146 @@
+.icon-item-wrap {
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line-item {
+    width: 1px;
+    height: 100%;
+    background-color: #5d6c89;
+}
+
+.item_body {
+    padding: 20px;
+    background-color: rgb(10, 148, 102);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.background_item-0 {
+    background-color: red;
+}
+.background_item-1 {
+    background-color: #1c2ca4;
+}
+.background_item-2 {
+    background-color: #5d6c89;
+}
+.background_item-3 {
+    background-color: rgb(235, 154, 147);
+}
+
+.item-right_body {
+    padding-right: 10px;
+    color: #f4f6fc;
+}
+
+.item-right_body>h3 {
+    color: #fff;
+}
+
+.item-left_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.time_item {
+    color: white;
+    font-weight: bold;
+}
+
+.icon-item-wrap {
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-item {
+    font-size: 23px;
+    color: red;
+}
+
+.add-item {
+    position: fixed;
+    bottom: 10px;
+    right: calc( 50% - 0px );
+    cursor: pointer;
+}
+
+.icon-add-item {
+    font-size: 40px;
+    color: #fff;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.delete-item {
+    color: rgb(255, 233, 233);
+    cursor: pointer;
+    float: right;
+    font-size: 15px;
+}
+
+.item-list_body {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.list-calendar-wrap {
+    height: calc(100vh - 450px);
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    background: rgb(255 255 255 / 60%);
+    border-radius: 5px;
+    padding: 10px;
+}
+.list-calendar-wrap::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 1080px) {
+    .list-calendar-wrap {
+        height: calc(100vh - 770px);
+    }
+
+    .item_body {
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+
+    .item-right_body > h3 {
+        font-size: 23px;
+    }
+
+    .item-right_body {
+        padding-left: 20px;
+        padding-right: 15px;
+    }
+
+    .time_item {
+        font-size: 23px;
+    }
+
+    .icon-item {
+        font-size: 40px;
+    }
+
+    .item-list_body {
+        font-size: 20px;
+    }
+
+    .add-item {
+        bottom: 30px;
+        right: calc( 50% - 30px );
+    }
+    .icon-add-item {
+        font-size: 60px;
+    }
+}

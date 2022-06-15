@@ -23,8 +23,8 @@ function SelectDay({ daySelect, setDaySelect }) {
                             className={`day-of-week-wrap_body ${daySelect === index ? 'day-focus' : ''}`}
                             onClick={() => handleSelectDay(index)}
                         >
-                            <p className="day-of-week_body">{item}</p>
-                            <p className="date_body">{day}</p>
+                            <div className="day-of-week_body">{item}</div>
+                            <div className="date_body">{day}</div>
                             {
                                 daySelect === index && <div className="dot" />
                             }

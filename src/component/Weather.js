@@ -3,6 +3,7 @@ import {useState, useEffect, useContext} from 'react';
 import moment from 'moment';
 import {API_Key} from "../config/connfig";
 import {WeatherContext} from "../App";
+import axios from 'axios';
 
 function Weather() {
     
@@ -13,9 +14,9 @@ function Weather() {
     const getWeatherDataFuture = () => {
         // navigator.geolocation.getCurrentPosition((data) => {
         //     let {latitude, longitude} = data.coords;
-            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=21&lon=105&exclude=hourly,minutely&units=metric&appid=${API_Key}&lang=vi`)
-            .then(response => response.json())
-            .then(data => setDataFuture(data.daily));
+            axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=21&lon=105&exclude=hourly,minutely&units=metric&appid=${API_Key}&lang=vi`)
+            .then(res => setDataFuture(res.data.daily))
+            .catch(err => console.log(err));
         // })
     }
 

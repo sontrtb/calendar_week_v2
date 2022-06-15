@@ -1,0 +1,19 @@
+.title_modal-add {
+    margin-top: 20px;
+}
+
+.icon-add-note {
+    font-size: 25px;
+    margin-left: 10px;
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+}
+
+.add-note-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.list-note-add {
+    margin-left: 20px;
+}
