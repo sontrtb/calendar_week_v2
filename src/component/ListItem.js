@@ -6,15 +6,20 @@ import {
     CheckSquareOutlined,
     PlusCircleOutlined,
     DeleteOutlined,
-    LoadingOutlined
+    LoadingOutlined,
+    ExportOutlined,
+    ImportOutlined
 } from '@ant-design/icons';
 import ModalAdd from './modal/ModalAdd';
+import ModalLogin from './modal/ModalLogin';
 import {notification} from 'antd';
+import {checkLogin} from '../ultis/checkLogin';
 
 function ListItem({ daySelect }) {
 
     const [listCalendar, setListCalendar] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalLoginVisible, setIsModalLoginVisible] = useState(false);
     const [refetch, setRefetch] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -36,18 +41,32 @@ function ListItem({ daySelect }) {
     }, [daySelect, refetch]);
 
     const handleDelete = (id) => {
-        axios.delete(API + "/" + id)
-        .then(res => {
-            refetchListCalendar();
-            notification.success({
-                message: 'Xóa thành công',
-            });
-        })
-        .catch(err => console.log(err))
+        if(checkLogin()) {
+            axios.delete(API + "/" + id)
+            .then(res => {
+                refetchListCalendar();
+                notification.success({
+                    message: 'Xóa thành công',
+                });
+            })
+            .catch(err => console.log(err))
+        } else {
+            toggerModalLogin();
+        }
     }
+
+    const handleOpenModalAdd = () => {
+        checkLogin() ?
+        toggerModal() :
+        toggerModalLogin()
+    };
 
     const toggerModal = () => {
         setIsModalVisible(!isModalVisible);
+    }
+
+    const toggerModalLogin = () => {
+        setIsModalLoginVisible(!isModalLoginVisible);
     }
 
     const scrollToBottom = () => {
@@ -61,6 +80,19 @@ function ListItem({ daySelect }) {
             }
         }, 30 * 1000);
     }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        console.log(checkLogin());
+
+        notification.success({
+            message: 'Đăng xuất thành công',
+        });
+    };
+
+    const handleLogin = () => {
+        toggerModalLogin();
+    };
 
     return (
         <div>
@@ -103,8 +135,24 @@ function ListItem({ daySelect }) {
                 }
                 <div ref={scrollRef} />
             </div>
+            
+            {
+               checkLogin() ?
+                <div className='logout' onClick={handleLogout}>
+                    <div>
+                        Đăng xuất
+                    </div>
+                    <ExportOutlined className='icon-logout'/>
+                </div> :
+                <div className='logout' onClick={handleLogin}>
+                    <div>
+                        Đăng nhập
+                    </div>
+                    <ImportOutlined className='icon-logout'/>
+                </div>
+            }
 
-            <div className='add-item' onClick={toggerModal}>
+            <div className='add-item' onClick={handleOpenModalAdd}>
                 <PlusCircleOutlined className='icon-add-item'/>
             </div>
 
@@ -114,6 +162,12 @@ function ListItem({ daySelect }) {
                 daySelect={daySelect}
                 refetchListCalendar={refetchListCalendar}
             />
+
+            <ModalLogin
+                isModalVisible={isModalLoginVisible}
+                toggerModal={toggerModalLogin}
+            />
+
         </div>
     )
 }

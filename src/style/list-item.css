@@ -92,6 +92,7 @@
 }
 
 .list-calendar-wrap {
+    position: relative;
     height: calc(100vh - 450px);
     overflow-y: auto;
     -ms-overflow-style: none;
@@ -113,6 +114,24 @@
 }
 .loading-icon {
     font-size: 50px;
+}
+
+.logout {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logout>div {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.icon-logout {
+    font-size: 30px;
+    color: rgb(56, 55, 99);
 }
 
 @media screen and (max-width: 1080px) {
@@ -156,5 +175,9 @@
 
     .loading-icon {
         font-size: 100px;
+    }
+
+    .logout {
+        display: none;
     }
 }

@@ -29,7 +29,7 @@ function App() {
     // navigator.geolocation.getCurrentPosition((data) => {
     //     let {latitude, longitude} = data.coords;
         // console.log(latitude, longitude);
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=21&lon=105&units=metric&appid=${API_Key}`)
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=20.98&lon=105.7857&units=metric&appid=${API_Key}`)
         .then(res => setDataCurrent(res.data))
         .catch(err => console.log(err));
     // })
@@ -56,6 +56,7 @@ function App() {
         <div
           id='main'
           className={backgroundMain(dataCurrent?.weather[0].icon)}
+          // className={backgroundMain('01')}
         >
           <Header />
           <Content />
