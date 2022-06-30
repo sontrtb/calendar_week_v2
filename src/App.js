@@ -3,34 +3,29 @@ import Header from './layout/Header';
 import Content from './layout/Content';
 import Footer from './layout/Footer';
 import { createContext, useState, useEffect } from 'react';
-import { API_Key } from './config/connfig';
+import { API_Key_CUR } from './config/connfig';
 import axios from 'axios';
 
 export const WeatherContext = createContext();
 
 function App() {
 
-  const weatherIdIcon = ['01', '02', '03', '04', '09', '10', '11', '13', '50'];
   const weatherBackground = [
-      'background_content-clear_sky',
-      'background_content-few_clouds',
-      'background_content-scattered_clouds',
-      'background_content-broken_clouds',
-      'background_content-shower_rain',
-      'background_content-rain',
-      'background_content-thunderstorm',
-      'background_content-snow',
-      'background_content-mist'
+      'background_content-1',
+      'background_content-2',
+      'background_content-3',
   ];
+
+  const d = new Date();
 
   const [dataCurrent, setDataCurrent] = useState();
 
   const getWeatherDataCurrent = () => {
     // navigator.geolocation.getCurrentPosition((data) => {
     //     let {latitude, longitude} = data.coords;
-        // console.log(latitude, longitude);
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=20.98&lon=105.7857&units=metric&appid=${API_Key}`)
-        .then(res => setDataCurrent(res.data))
+    //     console.log(latitude, longitude);
+        axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_Key_CUR}&q=21.0367536,105.8407837&lang=vi`)
+        .then(res => setDataCurrent(res.data.current))
         .catch(err => console.log(err));
     // })
   }
@@ -40,23 +35,21 @@ function App() {
     setInterval(getWeatherDataCurrent, 5*60*1000);
   }, []);
 
-  const backgroundMain = ( weatherIcon ) => {
-    if(!weatherIcon) return;
-    const weatherId = weatherIcon.slice(0, 2);
-    for(let i = 0; i < weatherIdIcon.length; i++) {
-        if(weatherId === weatherIdIcon[i])
-          return weatherBackground[i]
-    };
-    return;
+  const backgroundMain = () => {
+    const lengthBackground = weatherBackground.length;
+    const day = d.getDate();
+    return weatherBackground[lengthBackground%day - 1];
   };
+
+  console.log(backgroundMain());
 
   return (
     <WeatherContext.Provider value={dataCurrent}>
       <div className="App">
         <div
           id='main'
-          className={backgroundMain(dataCurrent?.weather[0].icon)}
-          // className={backgroundMain('01')}
+          // className={backgroundMain()}
+          className="background_content"
         >
           <Header />
           <Content />

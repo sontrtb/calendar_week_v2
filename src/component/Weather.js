@@ -28,10 +28,10 @@ function Weather() {
     return (
         <div className="weather-wrap">
             {
-                dataCurrent?.weather &&
+                dataCurrent &&
                 <div className='weather-current'>
-                    <img src={`http://openweathermap.org/img/wn/${dataCurrent.weather[0].icon}@4x.png`} alt='thoi tiet' />
-                    <div>{dataCurrent.main.temp.toFixed(0)}°C</div>
+                    <img src={dataCurrent.condition.icon} alt='thoi tiet' />
+                    <div>{dataCurrent.temp_c}°C</div>
                 </div>
                 
             }
